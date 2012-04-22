@@ -1,0 +1,33 @@
+{
+    "name": "dflydev/base32-crockford",
+    "type": "library",
+    "description": "Encode/decode numbers using Douglas Crockford's Base32 Encoding",
+    "homepage": "https://github.com/dflydev/dflydev-base32-crockford",
+    "keywords": ["encode", "decode", "base32"],
+    "license": "New BSD License",
+    "authors": [
+        {
+            "name": "Dragonfly Development Inc.",
+            "email": "info@dflydev.com",
+            "homepage": "http://dflydev.com"
+        },
+        {
+            "name": "Beau Simensen",
+            "email": "beau@dflydev.com",
+            "homepage": "http://beausimensen.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Dflydev\\Base32\\Crockford": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

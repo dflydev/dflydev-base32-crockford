@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" bootstrap="tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="Base32 Crockford Test Suite">
+            <directory>./tests/Dflydev/Tests/Base32/Crockford</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>./src/Dflydev/Base32/Crockford/</directory>
+        </whitelist>
+    </filter>
+</phpunit>
