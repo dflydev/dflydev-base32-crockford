@@ -18,10 +18,10 @@ class CrockfordTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideEncodedData
      */
-    public function testEncode($decodedValue, $encodedValue, $encodedValueWithChecksum)
+    public function testEncode($decodedValue, $encodedValue, $encodedValueWithChecksum, $requires64bit)
     {
-        if ($decodedValue < 0) {
-            $this->markTestSkipped('Fails on 32bit systems');
+        if ($requires64bit && '2147483647' === ini_get('PHP_INT_MAX')) {
+            $this->markTestSkipped('Requires 64bit system');
 
             return;
         }
@@ -44,10 +44,10 @@ class CrockfordTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider provideEncodedData
      */
-    public function testDecode($decodedValue, $encodedValue, $encodedValueWithChecksum)
+    public function testDecode($decodedValue, $encodedValue, $encodedValueWithChecksum, $requires64bit)
     {
-        if ($decodedValue < 0) {
-            $this->markTestSkipped('Fails on 32bit systems');
+        if ($requires64bit && '2147483647' === ini_get('PHP_INT_MAX')) {
+            $this->markTestSkipped('Requires 64bit system');
 
             return;
         }
@@ -110,14 +110,14 @@ class CrockfordTest extends \PHPUnit_Framework_TestCase
     public function provideEncodedData()
     {
         return array(
-            array(0, '0', '00'),
-            array(1, '1', '11'),
-            array(2, '2', '22'),
-            array(194, '62', '629'),
-            array(456789, 'DY2N', 'DY2NR'),
-            array(398373, 'C515', 'C515Z'),
-            array(519571, 'FVCK', 'FVCKH'),
-            array(3838385658376483, '3D2ZQ6TVC93', '3D2ZQ6TVC935'),
+            array(0, '0', '00', false),
+            array(1, '1', '11', false),
+            array(2, '2', '22', false),
+            array(194, '62', '629', false),
+            array(456789, 'DY2N', 'DY2NR', false),
+            array(398373, 'C515', 'C515Z', false),
+            array(519571, 'FVCK', 'FVCKH', false),
+            array(3838385658376483, '3D2ZQ6TVC93', '3D2ZQ6TVC935', true),
         );
     }
 
