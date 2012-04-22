@@ -20,8 +20,8 @@ class CrockfordTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncode($decodedValue, $encodedValue, $encodedValueWithChecksum, $requires64bit)
     {
-        if ($requires64bit && '2147483647' === ini_get('PHP_INT_MAX')) {
-            $this->markTestSkipped('Requires 64bit system');
+        if ($requires64bit && 4 === PHP_INT_SIZE) {
+            $this->markTestSkipped('Requires 64bit system (int size is '.PHP_INT_SIZE.')');
 
             return;
         }
@@ -46,8 +46,8 @@ class CrockfordTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecode($decodedValue, $encodedValue, $encodedValueWithChecksum, $requires64bit)
     {
-        if ($requires64bit && '2147483647' === ini_get('PHP_INT_MAX')) {
-            $this->markTestSkipped('Requires 64bit system');
+        if ($requires64bit && 4 === PHP_INT_SIZE) {
+            $this->markTestSkipped('Requires 64bit system (int size is '.PHP_INT_SIZE.')');
 
             return;
         }
