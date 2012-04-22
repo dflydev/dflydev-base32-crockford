@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Encode/decode numbers using Douglas Crockford's Base32 Encoding",
     "homepage": "https://github.com/dflydev/dflydev-base32-crockford",
-    "keywords": ["encode", "decode", "base32", "crockford"],
+    "keywords": ["encode", "encoder", "decode", "decoder", "base32", "crockford"],
     "license": "New BSD License",
     "authors": [
         {
