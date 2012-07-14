@@ -41,8 +41,7 @@ Requirements
 License
 -------
 
-This library is licensed under the New BSD License - see the LICENSE file
-for details.
+MIT, see LICENSE.
 
 
 Community

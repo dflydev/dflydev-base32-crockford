@@ -2,16 +2,14 @@
 
 /*
  * This file is a part of dflydev/base32-crockford.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Dflydev\Tests\Base32\Crockford;
-
-use Dflydev\Base32\Crockford\Crockford;
+namespace Dflydev\Base32\Crockford;
 
 class CrockfordTest extends \PHPUnit_Framework_TestCase
 {

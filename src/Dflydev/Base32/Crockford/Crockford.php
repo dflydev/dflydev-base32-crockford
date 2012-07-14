@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/base32-crockford.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,12 +11,17 @@
 
 namespace Dflydev\Base32\Crockford;
 
+/**
+ * Base32 Crockford implementation
+ *
+ * @author Beau Simensen <beau@dflydev.com>
+ */
 class Crockford
 {
     const NORMALIZE_ERRMODE_SILENT = 0;
     const NORMALIZE_ERRMODE_EXCEPTION = 1;
 
-    static public $symbols = array(
+    public static $symbols = array(
         '0', '1', '2', '3', '4',
         '5', '6', '7', '8', '9',
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -25,7 +30,7 @@ class Crockford
         '*', '~', '$', '=', 'U',
     );
 
-    static public $flippedSymbols = array(
+    public static $flippedSymbols = array(
         '0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4,
         '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9,
         'A' => 10, 'B' => 11, 'C' => 12, 'D' => 13,
@@ -39,12 +44,14 @@ class Crockford
 
     /**
      * Encode a number
-     * 
+     *
      * @param int $number
+     *
      * @return string
+     *
      * @throws \RuntimeException
      */
-    static public function encode($number)
+    public static function encode($number)
     {
         if (!is_numeric($number)) {
             throw new \RuntimeException("Specified number '{$number}' is not numeric");
@@ -66,38 +73,46 @@ class Crockford
 
     /**
      * Encode a number with checksum
-     * 
+     *
      * @param int $number
+     *
      * @return string
+     *
      * @throws \RuntimeException
      */
-    static public function encodeWithChecksum($number)
+    public static function encodeWithChecksum($number)
     {
         $encoded = static::encode($number);
- 
+
         return $encoded . static::$symbols[$number % 37];
     }
 
     /**
      * Decode a string
-     * 
-     * @param string $string
-     * @param int $errmode
+     *
+     * @param string $string  Encoded string
+     * @param int    $errmode Error mode
+     *
+     * @return int
+     *
      * @throws \RuntimeException
      */
-    static public function decode($string, $errmode = self::NORMALIZE_ERRMODE_SILENT)
+    public static function decode($string, $errmode = self::NORMALIZE_ERRMODE_SILENT)
     {
         return static::internalDecode($string, $errmode);
     }
 
     /**
      * Decode a string with checksum
-     * 
-     * @param string $string
-     * @param int $errmode
+     *
+     * @param string $string  Encoded string
+     * @param int    $errmode Error mode
+     *
+     * @return int
+     *
      * @throws \RuntimeException
      */
-    static public function decodeWithChecksum($string, $errmode = self::NORMALIZE_ERRMODE_SILENT)
+    public static function decodeWithChecksum($string, $errmode = self::NORMALIZE_ERRMODE_SILENT)
     {
         $checksum = substr($string, (strlen($string) -1), 1);
         $string = substr($string, 0, strlen($string) - 1);
@@ -114,12 +129,15 @@ class Crockford
 
     /**
      * Normalize a string
-     * 
-     * @param string $string
-     * @param int $errmode
+     *
+     * @param string $string  Encoded string
+     * @param int    $errmode Error mode
+     *
+     * @return string
+     *
      * @throws \RuntimeException
      */
-    static public function normalize($string, $errmode = self::NORMALIZE_ERRMODE_SILENT)
+    public static function normalize($string, $errmode = self::NORMALIZE_ERRMODE_SILENT)
     {
         $origString = $string;
 
@@ -138,12 +156,16 @@ class Crockford
 
     /**
      * Decode a string
-     * 
-     * @param string $string
-     * @param int $errmode
+     *
+     * @param string $string     Encoded string
+     * @param int    $errmode    Error mode
+     * @param bool   $isChecksum Is encoded with a checksum?
+     *
+     * @return int
+     *
      * @throws \RuntimeException
      */
-    static protected function internalDecode($string, $errmode = self::NORMALIZE_ERRMODE_SILENT, $isChecksum = false)
+    protected static function internalDecode($string, $errmode = self::NORMALIZE_ERRMODE_SILENT, $isChecksum = false)
     {
         if ('' === $string) {
             return '';
