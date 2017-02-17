@@ -61,6 +61,14 @@ class Crockford
             return 0;
         }
 
+        if ($number > PHP_INT_MAX){
+			throw new \RuntimeException("The number '{$number}' is too large for the current system. Only values up to and including '" . PHP_INT_MAX . "' are allowed.");
+		}
+		
+		if ($number < 0){
+			throw new \RuntimeException("The number to be encoded must be a non negative integer.");
+		}
+
         $response = array();
         while ($number) {
             $remainder = $number % 32;
@@ -118,7 +126,7 @@ class Crockford
         $string = substr($string, 0, strlen($string) - 1);
 
         $value = static::internalDecode($string, $errmode);
-        $checksumValue = static::internalDecode($checksum, self::NORMALIZE_ERRMODE_EXCEPTION, true);
+        $checksumValue = static::internalDecode($checksum, $errmode, true);
 
         if ($checksumValue !== ($value % 37)) {
             throw new \RuntimeException("Checksum symbol '$checksum' is not correct value for '$string'");
